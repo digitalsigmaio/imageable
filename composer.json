@@ -13,7 +13,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Digitalsigma\\ImageUpload": "src"
+            "Digitalsigma\\ImageUpload\\": "src"
         }
     },
     "extra": {
