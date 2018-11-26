@@ -1,0 +1,26 @@
+{
+    "name": "digitalsimga/img-upload",
+    "description": "Library for image upload",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Manson Xasthur",
+            "email": "mansonx13@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Digitalsigma\\ImageUpload": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Digitalsigma\\ImageUpload\\ImageUploadServiceProvider"
+            ]
+        }
+    }
+}
