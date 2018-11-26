@@ -8,7 +8,9 @@
 namespace Digitalsigma\ImageUpload;
 
 
-class ImageUploadServiceProvider
-{
+use Illuminate\Support\ServiceProvider;
 
+class ImageUploadServiceProvider extends ServiceProvider
+{
+    //
 }
