@@ -1,15 +1,15 @@
 {
     "name": "digitalsigma/img-upload",
-    "description": "Library for image upload",
+    "description": "Library for image upload.",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Manson Xasthur",
-            "email": "mansonx13@gmail.com",
-            "role": "Developer"
+            "email": "shazly@digitalsigma.io"
         }
     ],
+    "minimum-stability": "stable",
     "require": {},
     "autoload": {
         "psr-4": {
