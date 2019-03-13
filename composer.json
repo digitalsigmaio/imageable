@@ -13,13 +13,13 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Digitalsigma\\ImageUpload\\": "src"
+            "Digitalsigma\\ImageUploader\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Digitalsigma\\ImageUpload\\ImageUploadServiceProvider"
+                "Digitalsigma\\ImageUploader\\ImageUploadServiceProvider"
             ]
         }
     }
