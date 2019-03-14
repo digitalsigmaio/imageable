@@ -11,6 +11,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 trait ImageUploader
 {
+    public $imagePath = 'img';
     /**
      * Stores image in storage/app/public/img
      * and returns hashed file name
@@ -20,7 +21,7 @@ trait ImageUploader
      */
     public function uploadImage(UploadedFile $file): string
     {
-        return $file->store('img');
+        return $file->store($this->imagePath);
     }
     /**
      * Replace an existing image with a new one
