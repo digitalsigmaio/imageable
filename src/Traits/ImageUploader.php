@@ -85,9 +85,9 @@ trait ImageUploader
      *
      * @return string
      */
-    public function getImageUrl( string $fileName ): string
+    public function getImageUrl( ?string $fileName ): string
     {
-        return Storage::url( $fileName );
+        return $fileName ? Storage::url( $fileName ) : '';
     }
 
     /**
