@@ -39,6 +39,7 @@ trait ImageUploader
      * @param string $oldFileName
      *
      * @return string
+     * @throws \Exception
      */
     public function updateImage( UploadedFile $file, string $oldFileName ): string
     {
@@ -46,9 +47,9 @@ trait ImageUploader
             if ( $this->deleteImage( $oldFileName ) ) {
                 return $this->uploadImage( $file );
             }
-            return null;
+            throw new \Exception('Failed to delete old image');
         }
-        return null;
+        return $this->uploadImage( $file );
     }
 
     /**
