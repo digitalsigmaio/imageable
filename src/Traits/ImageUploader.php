@@ -5,12 +5,11 @@
  * Time: 2:54 PM
  * Update: 3/14/2019
  */
-
 namespace Digitalsigma\ImageUploader\Traits;
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 trait ImageUploader
