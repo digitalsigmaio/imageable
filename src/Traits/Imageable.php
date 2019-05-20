@@ -5,14 +5,14 @@
  * Time: 2:54 PM
  * Update: 3/14/2019
  */
-namespace Digitalsigma\ImageUploader\Traits;
+namespace Digitalsigma\Imageable\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-trait ImageUploader
+trait Imageable
 {
     public $imagePath = 'img';
 
@@ -25,8 +25,9 @@ trait ImageUploader
      *
      * @return string
      */
-    public function uploadImage( UploadedFile $file, string $format = null ): string
+    public function uploadImage( UploadedFile $file ): string
     {
+        $format = config('imageable.format');
         return $this->optimizeImage( $file, $format );
     }
 
@@ -44,8 +45,9 @@ trait ImageUploader
     {
         if ($oldFileName) {
             if ( Storage::disk( config( 'filesystems.default' ) )->exists( $oldFileName ) ) {
+                $format = Storage::get($oldFileName)->getClientOriginalExtension();
                 if ( $this->deleteImage( $oldFileName ) ) {
-                    return $this->uploadImage( $file );
+                    return $this->optimizeImage( $file, $format );
                 }
                 throw new \Exception('Failed to delete old image');
             }
@@ -116,8 +118,8 @@ trait ImageUploader
     protected function storeImage( $image, $extension ): string
     {
         $fileName = Str::random( 40 ) . '.' . $extension;
-        $path = storage_path( 'app/public/' . $this->imagePath . '/' . $fileName );
+        $path = storage_path( 'app/public/' . config('imageable.path') . '/' . $fileName );
         $image->save( $path );
-        return $this->imagePath . '/' . $fileName;
+        return config('imageable.path') . '/' . $fileName;
     }
 }

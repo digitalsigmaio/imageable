@@ -1,5 +1,5 @@
 {
-    "name": "digitalsigma/img-upload",
+    "name": "digitalsigma/imageable",
     "description": "Library for image upload.",
     "type": "library",
     "license": "MIT",
@@ -16,13 +16,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Digitalsigma\\ImageUploader\\": "src"
+            "Digitalsigma\\Imageable\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Digitalsigma\\ImageUploader\\ImageUploadServiceProvider"
+                "Digitalsigma\\Imageable\\ImageableServiceProvider"
             ]
         }
     }
