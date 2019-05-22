@@ -25,7 +25,7 @@ class ImageableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'config/imageable.php' => config_path('imageable.php'),
+            __DIR__.'\config\imageable.php' => config_path('imageable.php'),
         ]);
     }
 }
