@@ -14,20 +14,18 @@ use Intervention\Image\Facades\Image;
 
 trait Imageable
 {
-    public $imagePath = 'img';
-
     /**
      * Stores image in storage/app/public/img
      * and returns hashed file name
      *
      * @param UploadedFile $file
      * @param string $format
-     *
      * @return string
      */
-    public function uploadImage( UploadedFile $file ): string
+    public function uploadImage( UploadedFile $file, string $format = null ): string
     {
-        $format = config('imageable.format');
+        $format ?: config('imageable.format');
+
         return $this->optimizeImage( $file, $format );
     }
 
@@ -38,14 +36,16 @@ trait Imageable
      * @param UploadedFile $file
      * @param string $oldFileName
      *
+     * @param null $format
      * @return string
      * @throws \Exception
      */
-    public function updateImage( UploadedFile $file, ?string $oldFileName ): string
+    public function updateImage( UploadedFile $file, ?string $oldFileName, $format = null ): string
     {
+        $format ?: config('imageable.format');
+
         if ($oldFileName) {
             if ( Storage::disk( config( 'filesystems.default' ) )->exists( $oldFileName ) ) {
-                $format = Storage::get($oldFileName)->getClientOriginalExtension();
                 if ( $this->deleteImage( $oldFileName ) ) {
                     return $this->optimizeImage( $file, $format );
                 }
