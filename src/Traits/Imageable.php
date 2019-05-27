@@ -22,11 +22,11 @@ trait Imageable
      * @param string $format
      * @return string
      */
-    public function uploadImage( UploadedFile $file, string $format = null ): string
+    public static function uploadImage( UploadedFile $file, string $format = null ): string
     {
         $format ?: config('imageable.format');
 
-        return $this->optimizeImage( $file, $format );
+        return self::optimizeImage( $file, $format );
     }
 
     /**
@@ -40,20 +40,20 @@ trait Imageable
      * @return string
      * @throws \Exception
      */
-    public function updateImage( UploadedFile $file, ?string $oldFileName, $format = null ): string
+    public static function updateImage( UploadedFile $file, ?string $oldFileName, $format = null ): string
     {
         $format ?: config('imageable.format');
 
         if ($oldFileName) {
             if ( Storage::disk( config( 'filesystems.default' ) )->exists( $oldFileName ) ) {
-                if ( $this->deleteImage( $oldFileName ) ) {
-                    return $this->optimizeImage( $file, $format );
+                if ( self::deleteImage( $oldFileName ) ) {
+                    return self::optimizeImage( $file, $format );
                 }
                 throw new \Exception('Failed to delete old image');
             }
         }
 
-        return $this->uploadImage( $file );
+        return self::uploadImage( $file );
     }
 
     /**
@@ -63,7 +63,7 @@ trait Imageable
      *
      * @return bool
      */
-    public function deleteImage( string $fileName ): bool
+    public static function deleteImage( string $fileName ): bool
     {
         if ( Storage::disk( config( 'filesystems.default' ) )->exists( $fileName ) ) {
             return Storage::delete( $fileName );
@@ -90,7 +90,7 @@ trait Imageable
      *
      * @return string
      */
-    public function getImageUrl( ?string $fileName ): string
+    public static function getImageUrl( ?string $fileName ): string
     {
         return $fileName ? Storage::url( $fileName ) : '';
     }
@@ -103,10 +103,10 @@ trait Imageable
      *
      * @return string
      */
-    protected function optimizeImage( UploadedFile $file, ?string $format ): string
+    protected static function optimizeImage( UploadedFile $file, ?string $format ): string
     {
         $extension = $format ?? $file->getClientOriginalExtension();
-        return $this->storeImage( Image::make( $file->getRealPath() )->encode( $extension ), $extension );
+        return self::storeImage( Image::make( $file->getRealPath() )->encode( $extension ), $extension );
     }
 
     /**
@@ -115,7 +115,7 @@ trait Imageable
      *
      * @return string
      */
-    protected function storeImage( $image, $extension ): string
+    protected static function storeImage( $image, $extension ): string
     {
         $fileName = Str::random( 40 ) . '.' . $extension;
         $path = storage_path( 'app/public/' . config('imageable.path') . '/' . $fileName );
