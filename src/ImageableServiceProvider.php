@@ -14,7 +14,9 @@ class ImageableServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        //
+        $this->mergeConfigFrom([
+            __DIR__.'\config\imageable.php' => 'imageable',
+        ]);
     }
 
     /**
@@ -26,6 +28,6 @@ class ImageableServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'\config\imageable.php' => config_path('imageable.php'),
-        ]);
+        ], 'config');
     }
 }
